@@ -305,10 +305,10 @@ public class String1
     public String minCat(String a, String b) {
         String output = "";
         if (a.length() > b.length()) {
-            output = a.substring(b.length() - b.length() + 1) + b;
+            output = a.substring(a.length() - b.length(), a.length()) + b;
         }
         if (a.length() < b.length()) {
-            output = a + b.substring(a.length() - a.length() + 1);
+            output = a + b.substring(b.length() - a.length(), b.length());
         }
         if (a.length() == b.length()) {
             output = a + b;
@@ -324,13 +324,33 @@ public class String1
      * withoutX("Hxix") â†’ "Hxi"
      */
     public String withoutX(String str) {
-        String output = "";
+        /*
         String index = "x";
-        if (str.indexOf(index) == 0 || str.indexOf(index) == str.length()) {
-            output = str.substring(1, str.length() - 2);
+        if (str.indexOf(index) == 0 && index == str.substring(str.length() - 1, str.length())) {
+            return str.substring(1, str.length() - 1);
+        }else if (str.indexOf(index) == 0){
+            return str.substring(1, str.length());
+        }else if(index == str.substring(str.length() - 1, str.length())){
+            return str.substring(0, str.length()-1);
+        } 
+        else {
+            return str;
         }
-        return output;
-    }
+        */
+       
+        String target = "x";
+        
+        if (str.substring(0, 1).equals(target) && str.substring(str.length()-1, str.length()).equals(target)){
+            return str.substring(1, str.length() - 1);
+        }else if (str.substring(0, 1).equals(target)){
+            return str.substring(1, str.length());
+        }else if (str.substring(str.length()-1, str.length()).equals(target)){
+            return str.substring(0, str.length()-1);
+        }else{
+            return str;
+        }
+        
+    } 
 
     /*
      * Given a string, return a version without the first 2 chars. 
@@ -342,7 +362,22 @@ public class String1
      * deFront("away") â†’ "aay"
      */
     public String deFront(String str) {    
-        return unimplemented;
+        String a = "a";
+        String b = "b";
+        String output = "";
+        if (str.indexOf("ab") == 0){
+            output = str;
+        }
+        if (str.indexOf(a) == 0) {
+            output = str.substring(0, 1) + str.substring(2, str.length());
+        }else if (str.indexOf(b) == 1) {
+            output = str.substring(1, 2) + str.substring(2, str.length());
+        }
+        else {
+            output = str.substring(2, str.length());
+        }
+        
+        return output;
     }
 
 }
